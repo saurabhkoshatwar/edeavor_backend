@@ -5,12 +5,18 @@ from bson.json_util import dumps
 import json
 import os 
 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
-MONGODB_URI = os.environ.get('MONGODB_URI')
+MONGODB_URI = os.getenv('MONGODB_URI')
 
 # MongoDB connection setup
 try:
+    print(MONGODB_URI)
     client = MongoClient(MONGODB_URI)  
     db = client['project1']  # Database name
     collection = db['orders']      # Collection name
