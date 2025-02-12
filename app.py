@@ -49,6 +49,8 @@ def add_orders():
 
 @app.route('/api/orders', methods=['GET'])
 def get_orders():
+    print("Here")
+    print(MONGODB_URI)
     try:
         orders = list(collection.find())
         return dumps(orders), 200
