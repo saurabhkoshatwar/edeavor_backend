@@ -16,7 +16,6 @@ MONGODB_URI = os.getenv('MONGODB_URI')
 
 # MongoDB connection setup
 try:
-    print(MONGODB_URI)
     client = MongoClient(MONGODB_URI)  
     db = client['project1']  # Database name
     collection = db['orders']      # Collection name
@@ -27,8 +26,6 @@ except errors.ServerSelectionTimeoutError as err:
 @app.route('/api/orders', methods=['POST'])
 def add_orders():
     try:
-        print("Here")
-        print(MONGODB_URI)
         data = json.loads(request.data)
 
         if not data:
@@ -49,14 +46,12 @@ def add_orders():
 
 @app.route('/api/orders', methods=['GET'])
 def get_orders():
-    print("Here")
-    print(MONGODB_URI)
     try:
-        orders = list(collection.find_one())
+        orders = list(collection.find())
         return dumps(orders), 200
     except errors.PyMongoError as e:
         return jsonify({"error": f"Database error: {str(e)}"}), 500
-    except e:
+    except Exception as e:
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 if __name__ == '__main__':
