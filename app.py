@@ -48,8 +48,7 @@ def add_orders():
 def get_orders():
     try:
         orders = list(collection.find())
-        print(orders)
-        return dumps(orders), 200
+        return dumps(orders[0]['list_order']), 200
     except errors.PyMongoError as e:
         return jsonify({"error": f"Database error: {str(e)}"}), 500
     except Exception as e:
