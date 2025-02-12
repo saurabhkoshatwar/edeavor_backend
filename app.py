@@ -56,7 +56,7 @@ def get_orders():
         return dumps(orders), 200
     except errors.PyMongoError as e:
         return jsonify({"error": f"Database error: {str(e)}"}), 500
-    except Exception as e:
+    except e:
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 if __name__ == '__main__':
