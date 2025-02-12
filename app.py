@@ -52,7 +52,7 @@ def get_orders():
     print("Here")
     print(MONGODB_URI)
     try:
-        orders = list(collection.find())
+        orders = list(collection.find_one())
         return dumps(orders), 200
     except errors.PyMongoError as e:
         return jsonify({"error": f"Database error: {str(e)}"}), 500
