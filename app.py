@@ -27,6 +27,8 @@ except errors.ServerSelectionTimeoutError as err:
 @app.route('/api/orders', methods=['POST'])
 def add_orders():
     try:
+        print("Here")
+        print(MONGODB_URI)
         data = json.loads(request.data)
 
         if not data:
