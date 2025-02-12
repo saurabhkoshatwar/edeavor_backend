@@ -4,13 +4,15 @@ from flask_cors import CORS
 from pymongo import MongoClient, errors
 from bson.json_util import dumps
 import json
+import os 
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+MONGODB_URI = os.environ.get('MONGODB_URI')
 
 # MongoDB connection setup
 try:
-    client = MongoClient('mongodb+srv://saurabhkoshatwar1996:1ml9fZp8Q9WAbAly@cluster0.2ecie.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')  # Update with your MongoDB URI if needed
+    client = MongoClient(MONGODB_URI)  
     db = client['project1']  # Database name
     collection = db['orders']      # Collection name
 except errors.ServerSelectionTimeoutError as err:
